@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="690.0" prefWidth="812.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.45" fx:controller="com.github.kaiwinter.csvfx.ui.CsvFxController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <GridPane alignment="TOP_LEFT" gridLinesVisible="false" hgap="5.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" vgap="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <children>
+        <Label text="Input File" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="Separator" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Quote" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label text="Escape" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <Label text="Input" GridPane.columnIndex="0" GridPane.rowIndex="2">
+          <GridPane.margin>
+            <Insets bottom="3.0" top="10.0" fx:id="x1" />
+          </GridPane.margin>
+        </Label>
+        <TableView fx:id="fileContent" editable="true" maxHeight="-1.0" maxWidth="-1.0" prefHeight="211.0" prefWidth="540.0" tableMenuButtonVisible="false" GridPane.columnIndex="0" GridPane.columnSpan="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.rowSpan="1" GridPane.vgrow="ALWAYS" />
+        <ComboBox fx:id="inputSeparator" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <ComboBox fx:id="inputQuote" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <ComboBox fx:id="inputEscape" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="Output" GridPane.columnIndex="2" GridPane.margin="$x1" GridPane.rowIndex="2" />
+        <Label text="Separator" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <Label text="Quote" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+        <Label text="Escape" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+        <ComboBox fx:id="outputSeparator" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <ComboBox fx:id="outputQuote" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+        <ComboBox fx:id="outputEscape" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+        <Button id="fileChoose" alignment="CENTER" cancelButton="false" contentDisplay="LEFT" defaultButton="false" mnemonicParsing="false" onAction="#openFileAction" text="Choose" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+        <TextField id="filepath" fx:id="inputFilepath" editable="false" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="0" />
+        <Label text="Encoding" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label text="Encoding" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+        <ComboBox id="inputEscape" fx:id="inputEncoding" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <ComboBox id="inputEscape" fx:id="outputEncoding" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+        <Label minWidth="-Infinity" text="Output File" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField id="filepath" fx:id="outputFilepath" editable="false" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />
+        <Button fx:id="saveButton" defaultButton="false" disable="true" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#saveFileAction" prefWidth="-1.0" text="Save" wrapText="false" GridPane.columnIndex="6" GridPane.rowIndex="1">
+          <GridPane.margin>
+            <Insets />
+          </GridPane.margin>
+        </Button>
+        <Label text="" GridPane.columnIndex="4" GridPane.rowIndex="3">
+          <GridPane.margin>
+            <Insets left="15.0" />
+          </GridPane.margin>
+        </Label>
+        <RadioButton fx:id="editableCopyMode" disable="false" mnemonicParsing="false" onAction="#modeToggled" text="Write data from table below - editing possible" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="5">
+          <toggleGroup>
+            <ToggleGroup fx:id="copyMode" />
+          </toggleGroup>
+          <GridPane.margin>
+            <Insets left="20.0" fx:id="x2" />
+          </GridPane.margin>
+        </RadioButton>
+        <RadioButton fx:id="streamCopyMode" mnemonicParsing="false" onAction="#modeToggled" selected="true" text="Stream copy (for large files - no editing)" toggleGroup="$copyMode" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.margin="$x2" GridPane.rowIndex="3" />
+        <CheckBox fx:id="limitPreviewBox" minHeight="-Infinity" mnemonicParsing="false" onAction="#limitPreviewBoxToggled" selected="true" text="Limit preview:" GridPane.columnIndex="4" GridPane.rowIndex="4">
+          <GridPane.margin>
+            <Insets left="50.0" />
+          </GridPane.margin>
+        </CheckBox>
+        <TextField fx:id="limitPreviewText" alignment="CENTER_RIGHT" editable="true" maxWidth="-Infinity" onKeyReleased="#limitPreviewTextEntered" prefWidth="60.0" text="" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="NEVER" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" />
+        <ColumnConstraints hgrow="NEVER" maxWidth="90.0" minWidth="-Infinity" prefWidth="90.0" />
+        <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="-1.0" minWidth="-Infinity" prefWidth="-1.0" />
+        <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="90.0" minWidth="-Infinity" prefWidth="90.0" />
+        <ColumnConstraints fillWidth="false" hgrow="NEVER" maxWidth="-1.0" minWidth="-Infinity" prefWidth="-1.0" />
+        <ColumnConstraints hgrow="ALWAYS" prefWidth="250.0" />
+        <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="-1.0" />
+      </columnConstraints>
+      <padding>
+        <Insets />
+      </padding>
+      <rowConstraints>
+        <RowConstraints fillHeight="false" maxHeight="22.0" minHeight="-Infinity" prefHeight="22.0" vgrow="NEVER" />
+        <RowConstraints fillHeight="false" maxHeight="22.0" minHeight="-Infinity" prefHeight="22.0" vgrow="NEVER" />
+        <RowConstraints fillHeight="false" maxHeight="29.0" minHeight="-Infinity" prefHeight="29.0" vgrow="NEVER" />
+        <RowConstraints fillHeight="false" maxHeight="21.0" minHeight="-Infinity" prefHeight="21.0" vgrow="NEVER" />
+        <RowConstraints fillHeight="false" maxHeight="22.0" minHeight="-Infinity" prefHeight="22.0" vgrow="NEVER" />
+        <RowConstraints fillHeight="false" maxHeight="21.0" minHeight="-Infinity" prefHeight="21.0" vgrow="NEVER" />
+        <RowConstraints fillHeight="false" maxHeight="21.0" minHeight="-Infinity" prefHeight="21.0" vgrow="NEVER" />
+        <RowConstraints maxHeight="-1.0" prefHeight="477.0" vgrow="ALWAYS" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+  <padding>
+    <Insets />
+  </padding>
+</AnchorPane>
